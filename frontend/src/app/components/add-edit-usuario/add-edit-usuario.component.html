@@ -1,0 +1,34 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row-card">
+    <div class="center-card">
+        <div class="card border-secondary mb-3" style="max-width: 30rem;">
+            <div class="card-header text-center"> {{operacion}} usuario</div>
+            <div class="card-body">
+                <form [formGroup]="formUsuario" (ngSubmit)="addUsuario()" >
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="ingrese nombre" required>
+                    <span *ngIf="formUsuario.get('nombre')?.hasError('required') && formUsuario.get('nombre')?.touched">El campo nombre es requerido</span>
+                    
+                    <input formControlName="usuario" type="text" class="mt-2 form-control" placeholder="ingrese usuario" required>
+                    <span *ngIf="formUsuario.get('usuario')?.hasError('required') && formUsuario.get('usuario')?.touched">El campo usuario es requerido</span>
+                    <!-- <span *ngIf="usuarioEnUso">Usuario en uso</span> -->
+                    
+                    <input formControlName="password" type="password" class="mt-2 form-control" placeholder="ingrese password" required>
+
+                    <span *ngIf="formUsuario.get('password')?.touched && formUsuario.get('password')?.value.length < 8">Al menos 8 caracteres</span>
+                    
+                    <input formControlName="email" type="email" class="mt-2 form-control" placeholder="ingrese email" required>
+                    <span *ngIf="formUsuario.get('email')?.hasError('required') && formUsuario.get('email')?.touched">El campo email es requerido</span>
+
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button  [disabled]="formUsuario.invalid" type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-secondary" routerLink="/">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

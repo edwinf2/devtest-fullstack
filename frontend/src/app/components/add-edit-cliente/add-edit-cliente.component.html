@@ -1,0 +1,29 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row-card">
+    <div class="center-card">
+        <div class="card border-secondary mb-3" style="max-width: 30rem;">
+            <div class="card-header text-center"> {{operacion}} cliente</div>
+            <div class="card-body">
+                <form [formGroup]="formCliente" (ngSubmit)="addCliente()" >
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="ingrese nombre" required>
+                    <span *ngIf="formCliente.get('nombre')?.hasError('required') && formCliente.get('nombre')?.touched">El campo nombre es requerido</span>
+                    
+                    <input formControlName="email" type="email" class="mt-2 form-control" placeholder="ingrese email" required>
+                    <span *ngIf="formCliente.get('email')?.hasError('required') && formCliente.get('email')?.touched">El campo email es requerido</span>
+
+                    <input formControlName="edad" type="number" class="mt-2 form-control" placeholder="ingrese edad" required>
+                    <span *ngIf="formCliente.get('edad')?.hasError('required') && formCliente.get('edad')?.touched">El campo edad es requerido</span>
+
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button  [disabled]="formCliente.invalid" type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-secondary" routerLink="/clientes">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
